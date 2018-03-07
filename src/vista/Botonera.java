@@ -15,9 +15,11 @@ public class Botonera extends JPanel {
 	}
 
 	public void añadirBotones() {
-		for (int i = 0; i < botonera.length; i++) {
-			for (int j = 0; j < botonera.length; j++) {
-				this.botonera[i][j] = new JButton();
+		for (int i = 0; i < this.botonera.length; i++) {
+			for (int j = 0; j < this.botonera.length; j++) {
+				JButton boton = new JButton();
+				this.botonera[i][j] = boton;
+				this.add(boton);
 			}
 		}
 	}

@@ -35,10 +35,11 @@ public class UI_bug extends JFrame {
 	private JComboBox comboBox;
 	private JLabel lblMinas;
 	private JTextField textField;
-	private JButton btnCrearJuego;
+	protected JButton btnCrearJuego;
+	protected Botonera botonera;
 
 	public UI_bug() {
-		setMinimumSize(new Dimension(600, 400));
+		setMinimumSize(new Dimension(500, 500));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 450);
 		contentPane = new JPanel();
@@ -56,6 +57,9 @@ public class UI_bug extends JFrame {
 		panelBotonera.setBorder(new LineBorder(new Color(0, 128, 128), 2, true));
 		panelBotonera.setOpaque(false);
 		panelBg.add(panelBotonera, "panelBotonera");
+		
+		botonera = new Botonera();
+		panelBotonera.add(botonera);
 
 		panelSeleccion = new JPanel();
 		panelSeleccion.setOpaque(false);

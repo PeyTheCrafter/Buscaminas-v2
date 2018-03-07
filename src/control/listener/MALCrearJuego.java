@@ -13,8 +13,13 @@ import control.ParaUI;
 public class MALCrearJuego implements ActionListener {
 	ParaUI control;
 
+	public MALCrearJuego(ParaUI control) {
+		super();
+		this.control = control;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+		control.crearJuego();
 	}
 }
