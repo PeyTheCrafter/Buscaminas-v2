@@ -5,44 +5,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.Action;
 import javax.swing.SwingUtilities;
 
 import control.ParaUI;
 
-public class MALCrearJuego implements MouseListener {
+public class MALCrearJuego implements ActionListener {
 	ParaUI control;
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		if(SwingUtilities.isLeftMouseButton(e)) {
-			//TODO Acciones del botón izquierdo.
-		} else if(SwingUtilities.isRightMouseButton(e)) {
-			//TODO Acciones del botón derecho.
-		}
+	public void actionPerformed(ActionEvent e) {
 		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 }

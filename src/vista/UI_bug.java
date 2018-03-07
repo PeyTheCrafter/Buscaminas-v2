@@ -21,6 +21,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 import javax.swing.JButton;
+import javax.swing.DefaultComboBoxModel;
+import modelo.Dificultad;
 
 public class UI_bug extends JFrame {
 
@@ -96,6 +98,8 @@ public class UI_bug extends JFrame {
 		panel.add(lblDificultad, gbc_lblDificultad);
 		
 		comboBox = new JComboBox();
+		comboBox.setBackground(new Color(0, 128, 128));
+		comboBox.setModel(new DefaultComboBoxModel(Dificultad.values()));
 		comboBox.setForeground(new Color(255, 255, 255));
 		comboBox.setBorder(null);
 		comboBox.setOpaque(false);

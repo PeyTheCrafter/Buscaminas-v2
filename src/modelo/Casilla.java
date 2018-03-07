@@ -1,7 +1,7 @@
 package modelo;
 
 public class Casilla {
-	protected boolean mina = false, velada = true;
+	protected boolean mina = false, velada = true, marcada = false;
 	protected int numeroMinas = 0;
 	protected Coordenada coordenadas;
 
@@ -40,6 +40,14 @@ public class Casilla {
 
 	public void setCoordenadas(Coordenada coordenadas) {
 		this.coordenadas = coordenadas;
+	}
+
+	public boolean isMarcada() {
+		return marcada;
+	}
+
+	public void setMarcada(boolean marcada) {
+		this.marcada = marcada;
 	}
 
 }
