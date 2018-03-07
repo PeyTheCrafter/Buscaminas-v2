@@ -12,6 +12,7 @@ public class Botonera extends JPanel {
 	 */
 	public Botonera() {
 		setOpaque(false);
+		setLayout(new GridLayout(1, 0, 0, 0));
 	}
 
 	public void añadirBotones() {
@@ -26,6 +27,6 @@ public class Botonera extends JPanel {
 
 	public void crearBotonera(int ancho, int alto) {
 		this.botonera = new JButton[ancho][alto];
-		setLayout(new GridLayout(ancho, alto, 0, 0));
+		this.setLayout(new GridLayout(ancho, alto, 0, 0));
 	}
 }

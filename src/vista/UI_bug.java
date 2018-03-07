@@ -28,7 +28,7 @@ public class UI_bug extends JFrame {
 
 	protected JPanel contentPane;
 	protected PanelBG panelBg;
-	protected Botonera panelBotonera;
+	protected JPanel panelBotonera;
 	protected JPanel panelSeleccion;
 	private JPanel panel;
 	private JLabel lblDificultad;
@@ -39,7 +39,7 @@ public class UI_bug extends JFrame {
 	protected Botonera botonera;
 
 	public UI_bug() {
-		setMinimumSize(new Dimension(500, 500));
+		setMinimumSize(new Dimension(600, 400));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 450);
 		contentPane = new JPanel();
@@ -53,7 +53,6 @@ public class UI_bug extends JFrame {
 		panelBg.setLayout(new CardLayout(0, 0));
 
 		panelBotonera = new Botonera();
-		FlowLayout flowLayout = (FlowLayout) panelBotonera.getLayout();
 		panelBotonera.setBorder(new LineBorder(new Color(0, 128, 128), 2, true));
 		panelBotonera.setOpaque(false);
 		panelBg.add(panelBotonera, "panelBotonera");

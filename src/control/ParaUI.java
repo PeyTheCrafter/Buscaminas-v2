@@ -16,8 +16,8 @@ public class ParaUI extends UI_bug {
 	public void crearJuego() {
 		this.tablero = new Tablero(10, 10, 10);
 		System.out.println(this.tablero.getAncho() + " " + this.tablero.getAlto());
-		panelBotonera.crearBotonera(this.tablero.getAncho(), this.tablero.getAlto());
-		panelBotonera.añadirBotones();
+		botonera.crearBotonera(this.tablero.getAncho(), this.tablero.getAlto());
+		botonera.añadirBotones();
 		getCurrentPanel("panelBotonera");
 	}
 }
