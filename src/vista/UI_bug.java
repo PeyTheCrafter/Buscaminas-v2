@@ -15,16 +15,27 @@ import java.awt.ComponentOrientation;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Rectangle;
+import java.awt.Window;
+
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
+
+import control.Dificultad;
+
 import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Dificultad;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class UI_bug extends JFrame {
+
+	private final float SCALE = 0.75f;
 
 	protected JPanel contentPane;
 	protected PanelBG panelBg;
@@ -39,6 +50,20 @@ public class UI_bug extends JFrame {
 	protected Botonera botonera;
 
 	public UI_bug() {
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				int h = contentPane.getHeight();
+				int w = contentPane.getWidth();
+				int nh = (int) (h * SCALE);
+				int nw = (int) (w * SCALE);
+				if (h > w) {
+					botonera.setPreferredSize(new Dimension(nw, nw));
+				} else {
+					botonera.setPreferredSize(new Dimension(nh, nh));
+				}
+			}
+		});
 		setMinimumSize(new Dimension(600, 400));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 450);
@@ -48,17 +73,28 @@ public class UI_bug extends JFrame {
 		setContentPane(contentPane);
 
 		panelBg = new PanelBG("assets/bg.png");
-		panelBg.setBorder(new EmptyBorder(25, 50, 25, 50));
+		panelBg.setBorder(null);
 		contentPane.add(panelBg, BorderLayout.CENTER);
 		panelBg.setLayout(new CardLayout(0, 0));
 
 		panelBotonera = new Botonera();
+		panelBotonera.setMaximumSize(new Dimension(200, 200));
 		panelBotonera.setBorder(new LineBorder(new Color(0, 128, 128), 2, true));
 		panelBotonera.setOpaque(false);
 		panelBg.add(panelBotonera, "panelBotonera");
-		
+		GridBagLayout gbl_panelBotonera = new GridBagLayout();
+		gbl_panelBotonera.columnWidths = new int[] { 0, 300, 0, 0 };
+		gbl_panelBotonera.rowHeights = new int[] { 0, 150, 0, 0 };
+		gbl_panelBotonera.columnWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panelBotonera.rowWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
+		panelBotonera.setLayout(gbl_panelBotonera);
+
 		botonera = new Botonera();
-		panelBotonera.add(botonera);
+		GridBagConstraints gbc_botonera = new GridBagConstraints();
+		gbc_botonera.insets = new Insets(0, 0, 5, 5);
+		gbc_botonera.gridx = 1;
+		gbc_botonera.gridy = 1;
+		panelBotonera.add(botonera, gbc_botonera);
 
 		panelSeleccion = new JPanel();
 		panelSeleccion.setOpaque(false);
@@ -67,12 +103,12 @@ public class UI_bug extends JFrame {
 		panelSeleccion.setBorder(null);
 		panelBg.add(panelSeleccion, "panelSeleccion");
 		GridBagLayout gbl_panelSeleccion = new GridBagLayout();
-		gbl_panelSeleccion.columnWidths = new int[]{0, 35, 0, 0};
-		gbl_panelSeleccion.rowHeights = new int[]{0, 10, 0, 0};
-		gbl_panelSeleccion.columnWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_panelSeleccion.rowWeights = new double[]{1.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_panelSeleccion.columnWidths = new int[] { 0, 35, 0, 0 };
+		gbl_panelSeleccion.rowHeights = new int[] { 0, 10, 0, 0 };
+		gbl_panelSeleccion.columnWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panelSeleccion.rowWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		panelSeleccion.setLayout(gbl_panelSeleccion);
-		
+
 		panel = new JPanel();
 		panel.setForeground(new Color(255, 255, 255));
 		panel.setOpaque(false);
@@ -84,12 +120,12 @@ public class UI_bug extends JFrame {
 		gbc_panel.gridy = 1;
 		panelSeleccion.add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0, 35, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{1.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel.columnWidths = new int[] { 0, 0, 35, 0, 0 };
+		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panel.columnWeights = new double[] { 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
-		
+
 		lblDificultad = new JLabel("Dificultad:");
 		lblDificultad.setForeground(new Color(255, 255, 255));
 		lblDificultad.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -99,7 +135,7 @@ public class UI_bug extends JFrame {
 		gbc_lblDificultad.gridx = 1;
 		gbc_lblDificultad.gridy = 1;
 		panel.add(lblDificultad, gbc_lblDificultad);
-		
+
 		comboBox = new JComboBox();
 		comboBox.setBackground(new Color(0, 128, 128));
 		comboBox.setModel(new DefaultComboBoxModel(Dificultad.values()));
@@ -113,7 +149,7 @@ public class UI_bug extends JFrame {
 		gbc_comboBox.gridx = 2;
 		gbc_comboBox.gridy = 1;
 		panel.add(comboBox, gbc_comboBox);
-		
+
 		lblMinas = new JLabel("Minas:");
 		lblMinas.setForeground(new Color(255, 255, 255));
 		lblMinas.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -123,7 +159,7 @@ public class UI_bug extends JFrame {
 		gbc_lblMinas.gridx = 1;
 		gbc_lblMinas.gridy = 2;
 		panel.add(lblMinas, gbc_lblMinas);
-		
+
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		textField.setForeground(new Color(255, 255, 255));
@@ -136,7 +172,7 @@ public class UI_bug extends JFrame {
 		gbc_textField.gridy = 2;
 		panel.add(textField, gbc_textField);
 		textField.setColumns(10);
-		
+
 		btnCrearJuego = new JButton("Crear juego");
 		btnCrearJuego.setForeground(Color.WHITE);
 		btnCrearJuego.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -149,12 +185,12 @@ public class UI_bug extends JFrame {
 		gbc_btnCrearJuego.gridx = 2;
 		gbc_btnCrearJuego.gridy = 4;
 		panel.add(btnCrearJuego, gbc_btnCrearJuego);
-		
+
 		getCurrentPanel("panelSeleccion");
 	}
-	
+
 	public void getCurrentPanel(String name) {
-        ((CardLayout) panelBg.getLayout()).show(panelBg, name);
-    }
+		((CardLayout) panelBg.getLayout()).show(panelBg, name);
+	}
 
 }

@@ -2,6 +2,8 @@ package vista;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import java.awt.Dimension;
 import java.awt.GridLayout;
 
 public class Botonera extends JPanel {
@@ -13,6 +15,7 @@ public class Botonera extends JPanel {
 	public Botonera() {
 		setOpaque(false);
 		setLayout(new GridLayout(1, 0, 0, 0));
+		setPreferredSize(new Dimension(350, 350));
 	}
 
 	public void añadirBotones() {
@@ -20,6 +23,7 @@ public class Botonera extends JPanel {
 			for (int j = 0; j < this.botonera.length; j++) {
 				JButton boton = new JButton();
 				this.botonera[i][j] = boton;
+				boton.setName(i + "-" + j);
 				this.add(boton);
 			}
 		}
