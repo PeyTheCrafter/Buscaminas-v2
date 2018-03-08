@@ -1,4 +1,4 @@
-package modelo;
+package control;
 
 public enum Dificultad {
 	facil(10), normal(20), dificil(30);
