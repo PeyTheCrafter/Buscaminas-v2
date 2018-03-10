@@ -3,26 +3,16 @@ package vista;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
-import java.awt.FlowLayout;
 import java.awt.CardLayout;
-import javax.swing.BoxLayout;
 import java.awt.Dimension;
-import java.awt.Component;
-import java.awt.ComponentOrientation;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.Window;
-
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import java.awt.Font;
-import java.awt.GraphicsEnvironment;
-
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
 
@@ -32,6 +22,8 @@ import javax.swing.JButton;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.WindowStateListener;
+import java.awt.event.WindowEvent;
 
 public class UI_bug extends JFrame {
 
@@ -41,27 +33,20 @@ public class UI_bug extends JFrame {
 	protected PanelBG panelBg;
 	protected JPanel panelBotonera;
 	protected JPanel panelSeleccion;
-	private JPanel panel;
-	private JLabel lblDificultad;
-	private JComboBox comboBox;
-	private JLabel lblMinas;
-	private JTextField textField;
+	protected JPanel panel;
+	protected JLabel lblDificultad;
+	protected JComboBox cbSelectorDificultad;
+	protected JLabel lblMinas;
+	protected JTextField txtNumeroMinas;
 	protected JButton btnCrearJuego;
 	protected Botonera botonera;
+	private JLabel lblMeteSoloNmeros;
 
 	public UI_bug() {
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				int h = contentPane.getHeight();
-				int w = contentPane.getWidth();
-				int nh = (int) (h * SCALE);
-				int nw = (int) (w * SCALE);
-				if (h > w) {
-					botonera.setPreferredSize(new Dimension(nw, nw));
-				} else {
-					botonera.setPreferredSize(new Dimension(nh, nh));
-				}
+				actualizarTamano();
 			}
 		});
 		setMinimumSize(new Dimension(600, 400));
@@ -121,9 +106,9 @@ public class UI_bug extends JFrame {
 		panelSeleccion.add(panel, gbc_panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 0, 0, 35, 0, 0 };
-		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0 };
+		gbl_panel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_panel.columnWeights = new double[] { 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
 		lblDificultad = new JLabel("Dificultad:");
@@ -136,19 +121,19 @@ public class UI_bug extends JFrame {
 		gbc_lblDificultad.gridy = 1;
 		panel.add(lblDificultad, gbc_lblDificultad);
 
-		comboBox = new JComboBox();
-		comboBox.setBackground(new Color(0, 128, 128));
-		comboBox.setModel(new DefaultComboBoxModel(Dificultad.values()));
-		comboBox.setForeground(new Color(255, 255, 255));
-		comboBox.setBorder(null);
-		comboBox.setOpaque(false);
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox.gridx = 2;
-		gbc_comboBox.gridy = 1;
-		panel.add(comboBox, gbc_comboBox);
+		cbSelectorDificultad = new JComboBox();
+		cbSelectorDificultad.setBackground(new Color(0, 128, 128));
+		cbSelectorDificultad.setModel(new DefaultComboBoxModel(Dificultad.values()));
+		cbSelectorDificultad.setForeground(new Color(255, 255, 255));
+		cbSelectorDificultad.setBorder(null);
+		cbSelectorDificultad.setOpaque(false);
+		cbSelectorDificultad.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_cbSelectorDificultad = new GridBagConstraints();
+		gbc_cbSelectorDificultad.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbSelectorDificultad.insets = new Insets(0, 0, 5, 5);
+		gbc_cbSelectorDificultad.gridx = 2;
+		gbc_cbSelectorDificultad.gridy = 1;
+		panel.add(cbSelectorDificultad, gbc_cbSelectorDificultad);
 
 		lblMinas = new JLabel("Minas:");
 		lblMinas.setForeground(new Color(255, 255, 255));
@@ -160,18 +145,27 @@ public class UI_bug extends JFrame {
 		gbc_lblMinas.gridy = 2;
 		panel.add(lblMinas, gbc_lblMinas);
 
-		textField = new JTextField();
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField.setForeground(new Color(255, 255, 255));
-		textField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(0, 128, 128)));
-		textField.setOpaque(false);
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 2;
-		gbc_textField.gridy = 2;
-		panel.add(textField, gbc_textField);
-		textField.setColumns(10);
+		setTxtNumeroMinas(new JTextField());
+		txtNumeroMinas.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		txtNumeroMinas.setForeground(new Color(255, 255, 255));
+		txtNumeroMinas.setBorder(new MatteBorder(0, 0, 3, 0, (Color) new Color(0, 128, 128)));
+		txtNumeroMinas.setOpaque(false);
+		GridBagConstraints gbc_txtNumeroMinas = new GridBagConstraints();
+		gbc_txtNumeroMinas.insets = new Insets(0, 0, 5, 5);
+		gbc_txtNumeroMinas.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtNumeroMinas.gridx = 2;
+		gbc_txtNumeroMinas.gridy = 2;
+		panel.add(txtNumeroMinas, gbc_txtNumeroMinas);
+		txtNumeroMinas.setColumns(10);
+		
+		lblMeteSoloNmeros = new JLabel("Mete solo n\u00FAmeros o te borro system32");
+		lblMeteSoloNmeros.setForeground(Color.WHITE);
+		lblMeteSoloNmeros.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblMeteSoloNmeros = new GridBagConstraints();
+		gbc_lblMeteSoloNmeros.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMeteSoloNmeros.gridx = 2;
+		gbc_lblMeteSoloNmeros.gridy = 3;
+		panel.add(lblMeteSoloNmeros, gbc_lblMeteSoloNmeros);
 
 		btnCrearJuego = new JButton("Crear juego");
 		btnCrearJuego.setForeground(Color.WHITE);
@@ -183,14 +177,38 @@ public class UI_bug extends JFrame {
 		gbc_btnCrearJuego.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnCrearJuego.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCrearJuego.gridx = 2;
-		gbc_btnCrearJuego.gridy = 4;
+		gbc_btnCrearJuego.gridy = 5;
 		panel.add(btnCrearJuego, gbc_btnCrearJuego);
 
 		getCurrentPanel("panelSeleccion");
+	}
+
+	private void actualizarTamano() {
+		int h = contentPane.getHeight();
+		int w = contentPane.getWidth();
+		int nh = (int) (h * SCALE);
+		int nw = (int) (w * SCALE);
+		if (h > w) {
+			botonera.setPreferredSize(new Dimension(nw, nw));
+		} else {
+			botonera.setPreferredSize(new Dimension(nh, nh));
+		}
 	}
 
 	public void getCurrentPanel(String name) {
 		((CardLayout) panelBg.getLayout()).show(panelBg, name);
 	}
 
+	public void setTxtNumeroMinas(JTextField txtNumeroMinas) {
+		this.txtNumeroMinas = txtNumeroMinas;
+	}
+
+	public JTextField getTxtNumeroMinas() {
+		return this.txtNumeroMinas;
+	}
+
+	public int getDificultad() {
+		Dificultad dificultad = (Dificultad) cbSelectorDificultad.getSelectedItem();
+		return dificultad.getValor();
+	}
 }

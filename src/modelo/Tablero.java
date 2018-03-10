@@ -24,7 +24,7 @@ public class Tablero {
 	public void colocarMina(int x, int y) {
 		this.tablero[x][y].setMina(true);
 	}
-
+	
 	/**
 	 * Marca la casilla seleccionada.
 	 * 
