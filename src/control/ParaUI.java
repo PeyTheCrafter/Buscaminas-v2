@@ -24,14 +24,27 @@ public class ParaUI extends UI_bug {
 	public void actualizarVentana() {
 		for (int i = 0; i < this.tablero.casillas.length; i++) {
 			for (int j = 0; j < this.tablero.casillas[i].length; j++) {
-				if (!this.tablero.casillas[i][j].isVelada()) {
+				if (!this.tablero.casillas[i][j].isMina() && !this.tablero.casillas[i][j].isVelada()) {
 					this.botonera.botonera[i][j].setText(String.valueOf(this.tablero.casillas[i][j].getNumeroMinas()));
 				}
+				if (this.tablero.casillas[i][j].isMarcada()) {
+					this.botonera.botonera[i][j].setBackground(new Color(255, 128, 128));
+				} else {
+					this.botonera.botonera[i][j].setBackground(null);
+				}
+			}
+		}
+		actualizarVentanaDebug();
+	}
+
+	public void actualizarVentanaDebug() {
+		for (int i = 0; i < this.tablero.casillas.length; i++) {
+			for (int j = 0; j < this.tablero.casillas[i].length; j++) {
 				if (this.tablero.casillas[i][j].isMina()) {
 					this.botonera.botonera[i][j].setBorder(new LineBorder(Color.RED));
 				}
 				if (!this.tablero.casillas[i][j].isVelada()) {
-					this.botonera.botonera[i][j].setBorder(new LineBorder(Color.blue));
+					this.botonera.botonera[i][j].setBorder(new LineBorder(Color.BLUE));
 				}
 			}
 		}
@@ -59,7 +72,7 @@ public class ParaUI extends UI_bug {
 	public void añadirListenerBotonera() {
 		for (int i = 0; i < this.botonera.botonera.length; i++) {
 			for (int j = 0; j < this.botonera.botonera.length; j++) {
-				this.botonera.botonera[i][j].addActionListener(listenerBotonera);
+				this.botonera.botonera[i][j].addMouseListener(listenerBotonera);
 			}
 		}
 	}
