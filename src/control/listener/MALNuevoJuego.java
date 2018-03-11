@@ -18,5 +18,4 @@ public class MALNuevoJuego implements ActionListener {
 		this.control.borrarJuego();
 		this.control.getCurrentPanel("panelSeleccion");
 	}
-
 }
