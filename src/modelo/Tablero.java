@@ -75,6 +75,10 @@ public class Tablero {
 		casillas[x][y].setMarcada(true);
 	}
 
+	public void desmarcarCasilla(int x, int y) {
+		this.casillas[x][y].setMarcada(false);
+	}
+
 	/**
 	 * Desvela la casilla seleccionada.
 	 * 
@@ -85,6 +89,37 @@ public class Tablero {
 	 */
 	public void desvelarCasilla(int x, int y) {
 		casillas[x][y].setVelada(false);
+	}
+
+	/**
+	 * Calcula el número de casillas marcadas alrededor de una casilla.
+	 * 
+	 * @param x
+	 *            coordenada x.
+	 * @param y
+	 *            coordenada y.
+	 * @return el número de casillas mardadas.
+	 */
+	public int calcularBanderasAlrededor(int x, int y) {
+		int contador = 0;
+		for (int i = x - 1; i <= x + 1; i++) {
+			for (int j = y - 1; j <= y + 1; j++) {
+				if (comprobarRango(i, j) && this.casillas[i][j].isMarcada()) {
+					contador++;
+				}
+			}
+		}
+		return contador;
+	}
+
+	public void desvelarCasillasAlrededor(int x, int y) {
+		for (int i = x - 1; i <= x + 1; i++) {
+			for (int j = y - 1; j <= y + 1; j++) {
+				if (comprobarRango(i, j) && this.casillas[i][j].isVelada() && !this.casillas[i][j].isMarcada()) {
+					desvelarCasilla(i, j);
+				}
+			}
+		}
 	}
 
 	/**
@@ -129,7 +164,7 @@ public class Tablero {
 	 *            coordenada y de origen.
 	 */
 	public void recorrer(int x, int y) {
-		this.casillas[x][y].setVelada(false);
+		desvelarCasilla(x, y);
 		if (this.casillas[x][y].getNumeroMinas() == 0) {
 			for (int i = x - 1; i <= x + 1; i++) {
 				for (int j = y - 1; j <= y + 1; j++) {
@@ -137,7 +172,7 @@ public class Tablero {
 						if (this.casillas[i][j].getNumeroMinas() == 0 && this.casillas[i][j].isVelada()) {
 							recorrer(i, j);
 						} else {
-							this.casillas[i][j].setVelada(false);
+							desvelarCasilla(i, j);
 						}
 					}
 				}

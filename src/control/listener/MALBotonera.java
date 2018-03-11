@@ -32,14 +32,22 @@ public class MALBotonera implements MouseListener {
 	}
 
 	private void accionesLMouse(MouseEvent e, int x, int y) {
-		this.tablero.recorrer(x, y);
+		if (this.tablero.casillas[x][y].isVelada()) {
+			this.tablero.recorrer(x, y);
+		} else {
+			int marcadas = this.tablero.calcularBanderasAlrededor(x, y);
+			if (marcadas == this.tablero.casillas[x][y].getNumeroMinas()) {
+				this.tablero.desvelarCasillasAlrededor(x, y);
+			}
+		}
 	}
 
 	private void accionesRMouse(MouseEvent e, int x, int y) {
 		if (this.tablero.casillas[x][y].isMarcada()) {
-			this.tablero.casillas[x][y].setMarcada(false);
+			this.tablero.desmarcarCasilla(x, y);
 		} else {
-			this.tablero.casillas[x][y].setMarcada(true);
+			this.tablero.marcarCasilla(x, y);
+			;
 		}
 	}
 
