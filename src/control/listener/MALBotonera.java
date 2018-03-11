@@ -27,17 +27,6 @@ public class MALBotonera implements ActionListener {
 		int[] coordenadas = interpretarCoordenadas(boton.getName());
 		this.tablero.recorrer(coordenadas[0], coordenadas[1]);
 		control.actualizarVentana();
-		mostrarTableroConsola(this.tablero);
-	}
-
-	private void mostrarTableroConsola(Tablero tablero) {
-		for (int i = 0; i < tablero.casillas.length; i++) {
-			for (int j = 0; j < tablero.casillas.length; j++) {
-				System.out.print(this.tablero.casillas[i][j].getNumeroMinas());
-			}
-			System.out.println();
-		}
-		System.out.println();
 	}
 
 	private int[] interpretarCoordenadas(String cadena) {
