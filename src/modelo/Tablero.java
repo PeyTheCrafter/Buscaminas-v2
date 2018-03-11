@@ -15,6 +15,9 @@ public class Tablero {
 		}
 	}
 
+	/**
+	 * Coloca las minas en el tablero.
+	 */
 	public void sortearMinas() {
 		int contador = 0;
 		do {
@@ -56,8 +59,13 @@ public class Tablero {
 		this.minas = minas;
 	}
 
-	/*
-	 * Coloca una mina en la posición.
+	/**
+	 * Coloca una mina en las coordenadas especificadas.
+	 * 
+	 * @param x
+	 *            coordenada x.
+	 * @param y
+	 *            coordenada y.
 	 */
 	public void colocarMina(int x, int y) {
 		this.casillas[x][y].setMina(true);
@@ -75,6 +83,14 @@ public class Tablero {
 		casillas[x][y].setMarcada(true);
 	}
 
+	/**
+	 * Desmarca la casilla especificada.
+	 * 
+	 * @param x
+	 *            coordenada x.
+	 * @param y
+	 *            coordenada y.
+	 */
 	public void desmarcarCasilla(int x, int y) {
 		this.casillas[x][y].setMarcada(false);
 	}
@@ -112,6 +128,15 @@ public class Tablero {
 		return contador;
 	}
 
+	/**
+	 * Desvela las casillas de alrededor de una casilla especificada si está dentro
+	 * del rango, está velada y no está marcada.
+	 * 
+	 * @param x
+	 *            coordenada x.
+	 * @param y
+	 *            coordenada y.
+	 */
 	public void desvelarCasillasAlrededor(int x, int y) {
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j <= y + 1; j++) {

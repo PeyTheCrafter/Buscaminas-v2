@@ -59,13 +59,13 @@ public class UI_bug extends JFrame {
 		setMinimumSize(new Dimension(600, 400));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 450);
-		
+
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
+
 		mnJuego = new JMenu("Juego");
 		menuBar.add(mnJuego);
-		
+
 		mntmNuevoJuego = new JMenuItem("Nuevo juego");
 		mnJuego.add(mntmNuevoJuego);
 		contentPane = new JPanel();
@@ -89,7 +89,7 @@ public class UI_bug extends JFrame {
 		gbl_panelBotonera.columnWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		gbl_panelBotonera.rowWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		panelBotonera.setLayout(gbl_panelBotonera);
-		
+
 		lblEstadoJuego = new JLabel("");
 		lblEstadoJuego.setForeground(Color.WHITE);
 		lblEstadoJuego.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -183,7 +183,7 @@ public class UI_bug extends JFrame {
 		gbc_txtNumeroMinas.gridy = 2;
 		panel.add(txtNumeroMinas, gbc_txtNumeroMinas);
 		txtNumeroMinas.setColumns(10);
-		
+
 		lblMeteSoloNmeros = new JLabel("Mete solo n\u00FAmeros o te borro system32");
 		lblMeteSoloNmeros.setForeground(Color.WHITE);
 		lblMeteSoloNmeros.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -209,6 +209,9 @@ public class UI_bug extends JFrame {
 		getCurrentPanel("panelSeleccion");
 	}
 
+	/**
+	 * Actualiza el tamaño de la botonera en función del tamaño de la ventana.
+	 */
 	private void actualizarTamano() {
 		int h = contentPane.getHeight();
 		int w = contentPane.getWidth();
@@ -221,6 +224,12 @@ public class UI_bug extends JFrame {
 		}
 	}
 
+	/**
+	 * Cambia el panel de la ventana.
+	 * 
+	 * @param name
+	 *            nombre del panel.
+	 */
 	public void getCurrentPanel(String name) {
 		((CardLayout) panelBg.getLayout()).show(panelBg, name);
 	}
@@ -233,11 +242,16 @@ public class UI_bug extends JFrame {
 		return this.txtNumeroMinas;
 	}
 
+	/**
+	 * Obtiene la dificultad del comboBox.
+	 * 
+	 * @return la dificultad seleccionada.
+	 */
 	public int getDificultad() {
 		Dificultad dificultad = (Dificultad) cbSelectorDificultad.getSelectedItem();
 		return dificultad.getValor();
 	}
-	
+
 	public Botonera getBotonera() {
 		return botonera;
 	}

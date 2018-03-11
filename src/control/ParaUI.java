@@ -24,12 +24,16 @@ public class ParaUI extends UI_bug {
 		this.mntmNuevoJuego.addActionListener(listenerNuevoJuego);
 	}
 
+	/**
+	 * Borra todos los elementos de la botonera.
+	 */
 	public void borrarJuego() {
 		this.botonera.removeAll();
 	}
 
 	/**
-	 * Desactiva los botones de la botonera y muestra la localización de las minas.
+	 * Desactiva los botones de la botonera, muestra la localización de las minas y
+	 * muestra un mensaje.
 	 */
 	public void perder() {
 		this.botonera.desactivarBotonera();
@@ -79,8 +83,13 @@ public class ParaUI extends UI_bug {
 		}
 	}
 
-	/*
+	/**
 	 * Crea el juego.
+	 * 
+	 * @param lado
+	 *            lado del tablero de juego.
+	 * @param numeroMinas
+	 *            número de minas para el juego actual.
 	 */
 	public void crearJuego(int lado, int numeroMinas) {
 		this.tablero = new Tablero(lado, numeroMinas);
@@ -114,11 +123,19 @@ public class ParaUI extends UI_bug {
 		}
 	}
 
+	/**
+	 * Desactiva los botones de la botonera y muestra un mensaje.
+	 */
 	public void ganar() {
 		this.botonera.desactivarBotonera();
 		this.lblEstadoJuego.setText("¡Has ganado!");
 	}
 
+	/**
+	 * Comprueba si se ha ganado el juego. Si el número de casillas desveladas
+	 * coincide con el total de casillas del tablero menos el total de minas, se
+	 * gana.
+	 */
 	public void comprobarJuego() {
 		int casillasDesveladas = 0;
 		for (int i = 0; i < this.tablero.casillas.length; i++) {

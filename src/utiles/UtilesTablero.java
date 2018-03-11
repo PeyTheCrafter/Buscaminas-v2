@@ -7,16 +7,26 @@ public class UtilesTablero {
 		super();
 	}
 
-	/*
-	 * Calcula el lado a partir del número de casillas.
+	/**
+	 * Calcula el lado a partir del número de casillas introducido.
+	 * 
+	 * @param casillas
+	 *            número total de casillas del tablero.
+	 * @return el lado del tablero.
 	 */
 	public int calcularLado(int casillas) {
 		return (int) Math.floor(Math.sqrt(casillas));
 	}
 
-	/*
-	 * Calcula el número de casillas total en función de las minas y de la
+	/**
+	 * Calcula el número total de casillas en función del número de minas y de la
 	 * dificultad.
+	 * 
+	 * @param numeroMinas
+	 *            número de minas.
+	 * @param relacion
+	 *            dificultad elegida.
+	 * @return el número total de casillas.
 	 */
 	public int calcularCasillas(int numeroMinas, int relacion) {
 		int casillas = relacion * numeroMinas;

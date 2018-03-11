@@ -33,6 +33,12 @@ public class MALBotonera implements MouseListener {
 		this.control.comprobarJuego();
 	}
 
+	/**
+	 * Acciones para el botón izquierdo del ratón.
+	 * @param e evento.
+	 * @param x coordenada x.
+	 * @param y coordenada y.
+	 */
 	private void accionesLMouse(MouseEvent e, int x, int y) {
 		if (this.tablero.casillas[x][y].isMina()) {
 			this.control.perder();
@@ -50,6 +56,12 @@ public class MALBotonera implements MouseListener {
 		}
 	}
 
+	/**
+	 * Acciones para el botón derecho del ratón.
+	 * @param e evento.
+	 * @param x coordenada x.
+	 * @param y coordenada y.
+	 */
 	private void accionesRMouse(MouseEvent e, int x, int y) {
 		if (this.tablero.casillas[x][y].isMarcada()) {
 			this.tablero.desmarcarCasilla(x, y);
@@ -83,6 +95,11 @@ public class MALBotonera implements MouseListener {
 
 	}
 
+	/**
+	 * Interpreta las coordenadas numericas a partir de un string.
+	 * @param cadena la cadena con las coordenadas en bruto.
+	 * @return int[] con las coordendas procesadas.
+	 */
 	private int[] interpretarCoordenadas(String cadena) {
 		String coord[] = cadena.split("-");
 		int coordenadas[] = new int[2];

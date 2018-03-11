@@ -20,6 +20,10 @@ public class MALCrearJuego implements ActionListener {
 		this.control = control;
 	}
 
+	/**
+	 * Obtiene el número de minas, calcula el número de casillas, calcula el lado
+	 * del tablero y crea el juego.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int numeroMinas = Integer.valueOf(this.control.getTxtNumeroMinas().getText());

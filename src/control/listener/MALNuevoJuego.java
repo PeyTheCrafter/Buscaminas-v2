@@ -13,6 +13,9 @@ public class MALNuevoJuego implements ActionListener {
 		this.control = control;
 	}
 
+	/**
+	 * Borra el juego y cambia a la vista de selección de dificultad.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.control.borrarJuego();

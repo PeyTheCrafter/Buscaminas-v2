@@ -44,6 +44,15 @@ public class Botonera extends JPanel {
 		}
 	}
 
+	/**
+	 * Cambia el borde y el fondo de una casilla que ha sido comprobada previamente
+	 * como mina.
+	 * 
+	 * @param x
+	 *            coordenada x.
+	 * @param y
+	 *            coordenada y.
+	 */
 	public void mostrarMina(int x, int y) {
 		this.botonera[x][y].setBorder(new LineBorder(Color.RED, 2));
 		this.botonera[x][y].setBackground(new Color(255, 64, 64));
