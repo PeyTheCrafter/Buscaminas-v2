@@ -6,6 +6,7 @@ import javax.swing.border.LineBorder;
 
 import control.listener.MALBotonera;
 import control.listener.MALCrearJuego;
+import control.listener.MALNuevoJuego;
 import modelo.Casilla;
 import modelo.Tablero;
 import utiles.UtilesTablero;
@@ -16,9 +17,15 @@ public class ParaUI extends UI_bug {
 	UtilesTablero utiles;
 	MALCrearJuego listenerCrearJuego = new MALCrearJuego(this);
 	MALBotonera listenerBotonera;
+	MALNuevoJuego listenerNuevoJuego = new MALNuevoJuego(this);
 
 	public ParaUI() {
-		btnCrearJuego.addActionListener(listenerCrearJuego);
+		this.btnCrearJuego.addActionListener(listenerCrearJuego);
+		this.mntmNuevoJuego.addActionListener(listenerNuevoJuego);
+	}
+
+	public void borrarJuego() {
+		this.botonera.removeAll();
 	}
 
 	/**
@@ -33,6 +40,7 @@ public class ParaUI extends UI_bug {
 				}
 			}
 		}
+		this.lblEstadoJuego.setText("¡Has perdido!");
 	}
 
 	/**
@@ -108,6 +116,7 @@ public class ParaUI extends UI_bug {
 
 	public void ganar() {
 		this.botonera.desactivarBotonera();
+		this.lblEstadoJuego.setText("¡Has ganado!");
 	}
 
 	public void comprobarJuego() {

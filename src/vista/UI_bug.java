@@ -24,6 +24,9 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.WindowStateListener;
 import java.awt.event.WindowEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JMenu;
 
 public class UI_bug extends JFrame {
 
@@ -41,6 +44,10 @@ public class UI_bug extends JFrame {
 	protected JButton btnCrearJuego;
 	protected Botonera botonera;
 	private JLabel lblMeteSoloNmeros;
+	protected JLabel lblEstadoJuego;
+	private JMenuBar menuBar;
+	private JMenu mnJuego;
+	protected JMenuItem mntmNuevoJuego;
 
 	public UI_bug() {
 		addComponentListener(new ComponentAdapter() {
@@ -52,6 +59,15 @@ public class UI_bug extends JFrame {
 		setMinimumSize(new Dimension(600, 400));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 450);
+		
+		menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		mnJuego = new JMenu("Juego");
+		menuBar.add(mnJuego);
+		
+		mntmNuevoJuego = new JMenuItem("Nuevo juego");
+		mnJuego.add(mntmNuevoJuego);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 128, 128));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -73,6 +89,16 @@ public class UI_bug extends JFrame {
 		gbl_panelBotonera.columnWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		gbl_panelBotonera.rowWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		panelBotonera.setLayout(gbl_panelBotonera);
+		
+		lblEstadoJuego = new JLabel("");
+		lblEstadoJuego.setForeground(Color.WHITE);
+		lblEstadoJuego.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblEstadoJuego = new GridBagConstraints();
+		gbc_lblEstadoJuego.anchor = GridBagConstraints.SOUTH;
+		gbc_lblEstadoJuego.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEstadoJuego.gridx = 1;
+		gbc_lblEstadoJuego.gridy = 0;
+		panelBotonera.add(lblEstadoJuego, gbc_lblEstadoJuego);
 
 		botonera = new Botonera();
 		GridBagConstraints gbc_botonera = new GridBagConstraints();
