@@ -53,7 +53,7 @@ public class ParaUI extends UI_bug {
 					this.botonera.botonera[i][j].setText(String.valueOf(this.tablero.casillas[i][j].getNumeroMinas()));
 				}
 				if (this.tablero.casillas[i][j].isMarcada()) {
-					this.botonera.botonera[i][j].setBackground(new Color(255, 128, 128));
+					this.botonera.botonera[i][j].setBackground(new Color(0, 164, 164));
 				} else {
 					this.botonera.botonera[i][j].setBackground(null);
 				}
