@@ -53,8 +53,4 @@ public class ParaUI extends UI_bug {
 			}
 		}
 	}
-
-	public void realizarJuagada(int[] coordenadas) {
-
-	}
 }
