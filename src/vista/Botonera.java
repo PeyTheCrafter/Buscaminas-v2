@@ -2,7 +2,9 @@ package vista;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -32,5 +34,18 @@ public class Botonera extends JPanel {
 	public void crearBotonera(int ancho, int alto) {
 		this.botonera = new JButton[ancho][alto];
 		this.setLayout(new GridLayout(ancho, alto, 0, 0));
+	}
+
+	public void desactivarBotonera() {
+		for (int i = 0; i < this.botonera.length; i++) {
+			for (int j = 0; j < this.botonera[i].length; j++) {
+				this.botonera[i][j].setEnabled(false);
+			}
+		}
+	}
+
+	public void mostrarMina(int x, int y) {
+		this.botonera[x][y].setBorder(new LineBorder(Color.RED, 2));
+		this.botonera[x][y].setBackground(new Color(255, 64, 64));
 	}
 }
