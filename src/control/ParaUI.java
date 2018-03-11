@@ -1,5 +1,9 @@
 package control;
 
+import java.awt.Color;
+
+import javax.swing.border.LineBorder;
+
 import control.listener.MALBotonera;
 import control.listener.MALCrearJuego;
 import modelo.Casilla;
@@ -20,8 +24,14 @@ public class ParaUI extends UI_bug {
 	public void actualizarVentana() {
 		for (int i = 0; i < this.tablero.casillas.length; i++) {
 			for (int j = 0; j < this.tablero.casillas[i].length; j++) {
-				if (!this.tablero.casillas[i][j].isMina()) {
+				if (!this.tablero.casillas[i][j].isVelada()) {
 					this.botonera.botonera[i][j].setText(String.valueOf(this.tablero.casillas[i][j].getNumeroMinas()));
+				}
+				if (this.tablero.casillas[i][j].isMina()) {
+					this.botonera.botonera[i][j].setBorder(new LineBorder(Color.RED));
+				}
+				if (this.tablero.casillas[i][j].getNumeroMinas() > 0 && !this.tablero.casillas[i][j].isVelada()) {
+					this.botonera.botonera[i][j].setBorder(new LineBorder(Color.RED, 3));
 				}
 			}
 		}
