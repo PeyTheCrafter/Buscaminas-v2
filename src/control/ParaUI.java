@@ -30,8 +30,8 @@ public class ParaUI extends UI_bug {
 				if (this.tablero.casillas[i][j].isMina()) {
 					this.botonera.botonera[i][j].setBorder(new LineBorder(Color.RED));
 				}
-				if (this.tablero.casillas[i][j].getNumeroMinas() > 0 && !this.tablero.casillas[i][j].isVelada()) {
-					this.botonera.botonera[i][j].setBorder(new LineBorder(Color.RED, 3));
+				if (!this.tablero.casillas[i][j].isVelada()) {
+					this.botonera.botonera[i][j].setBorder(new LineBorder(Color.blue));
 				}
 			}
 		}
