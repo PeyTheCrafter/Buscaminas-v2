@@ -1,16 +1,15 @@
 package control.listener;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.SwingUtilities;
 
 import control.ParaUI;
-import modelo.Casilla;
 import modelo.Tablero;
-import vista.Botonera;
 
-public class MALBotonera implements ActionListener {
+public class MALBotonera implements MouseListener {
 	ParaUI control;
 	Tablero tablero;
 
@@ -21,12 +20,51 @@ public class MALBotonera implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void mouseClicked(MouseEvent e) {
 		JButton boton = (JButton) e.getSource();
-		System.out.println(boton.getName());
 		int[] coordenadas = interpretarCoordenadas(boton.getName());
-		this.tablero.recorrer(coordenadas[0], coordenadas[1]);
-		control.actualizarVentana();
+		if (SwingUtilities.isLeftMouseButton(e)) {
+			accionesLMouse(e, coordenadas[0], coordenadas[1]);
+		} else if (SwingUtilities.isRightMouseButton(e)) {
+			accionesRMouse(e, coordenadas[0], coordenadas[1]);
+		}
+		this.control.actualizarVentana();
+	}
+
+	private void accionesLMouse(MouseEvent e, int x, int y) {
+		this.tablero.recorrer(x, y);
+	}
+
+	private void accionesRMouse(MouseEvent e, int x, int y) {
+		if (this.tablero.casillas[x][y].isMarcada()) {
+			this.tablero.casillas[x][y].setMarcada(false);
+		} else {
+			this.tablero.casillas[x][y].setMarcada(true);
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
 	}
 
 	private int[] interpretarCoordenadas(String cadena) {
