@@ -15,6 +15,18 @@ public class Tablero {
 		}
 	}
 
+	public void sortearMinas() {
+		int contador = 0;
+		do {
+			int x = (int) (Math.random() * this.casillas.length);
+			int y = (int) (Math.random() * this.casillas.length);
+			if (!this.casillas[x][y].isMina()) {
+				colocarMina(x, y);
+				contador++;
+			}
+		} while (contador < this.minas);
+	}
+
 	/**
 	 * Comprueba si la casilla actual está dentro del rango del tablero.
 	 * 
@@ -99,8 +111,8 @@ public class Tablero {
 	 */
 	public void incrementarMinas(int x, int y) {
 		for (int i = x - 1; i <= x + 1; i++) {
-			for (int j = y - 1; j < y + 1; j++) {
-				if (comprobarRango(i, j) && x != 0 && y != 0) {
+			for (int j = y - 1; j <= y + 1; j++) {
+				if (comprobarRango(i, j) && !this.casillas[i][j].isMina()) {
 					this.casillas[i][j].numeroMinas++;
 				}
 			}
