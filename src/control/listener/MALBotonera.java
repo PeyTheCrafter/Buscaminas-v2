@@ -26,13 +26,14 @@ public class MALBotonera implements ActionListener {
 		System.out.println(boton.getName());
 		int[] coordenadas = interpretarCoordenadas(boton.getName());
 		this.tablero.recorrer(coordenadas[0], coordenadas[1]);
-		mostrarTableroConsola(coordenadas);
+		control.actualizarVentana();
+		mostrarTableroConsola(this.tablero);
 	}
 
-	private void mostrarTableroConsola(int[] coordenadas) {
-		for (int i = 0; i < coordenadas.length; i++) {
-			for (int j = 0; j < coordenadas.length; j++) {
-				System.out.println(this.tablero.casillas[i][j]);
+	private void mostrarTableroConsola(Tablero tablero) {
+		for (int i = 0; i < tablero.casillas.length; i++) {
+			for (int j = 0; j < tablero.casillas.length; j++) {
+				System.out.print(this.tablero.casillas[i][j].getNumeroMinas());
 			}
 			System.out.println();
 		}
