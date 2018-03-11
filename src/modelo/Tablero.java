@@ -129,10 +129,17 @@ public class Tablero {
 	 *            coordenada y de origen.
 	 */
 	public void recorrer(int x, int y) {
+		this.casillas[x][y].setVelada(false);
 		if (this.casillas[x][y].getNumeroMinas() == 0) {
 			for (int i = x - 1; i <= x + 1; i++) {
 				for (int j = y - 1; j <= y + 1; j++) {
-
+					if (comprobarRango(i, j) && !this.casillas[i][j].isMina()) {
+						if (this.casillas[i][j].getNumeroMinas() == 0 && this.casillas[i][j].isVelada()) {
+							recorrer(i, j);
+						} else {
+							this.casillas[i][j].setVelada(false);
+						}
+					}
 				}
 			}
 		}
