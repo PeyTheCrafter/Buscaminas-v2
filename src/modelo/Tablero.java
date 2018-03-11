@@ -133,7 +133,7 @@ public class Tablero {
 		if (this.casillas[x][y].getNumeroMinas() == 0) {
 			for (int i = x - 1; i <= x + 1; i++) {
 				for (int j = y - 1; j <= y + 1; j++) {
-					if (comprobarRango(i, j) && !this.casillas[i][j].isMina()) {
+					if (comprobarRango(i, j) && !this.casillas[i][j].isMina() && !this.casillas[i][j].isMarcada()) {
 						if (this.casillas[i][j].getNumeroMinas() == 0 && this.casillas[i][j].isVelada()) {
 							recorrer(i, j);
 						} else {
