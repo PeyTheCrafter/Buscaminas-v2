@@ -9,9 +9,11 @@ import javax.swing.Action;
 import javax.swing.SwingUtilities;
 
 import control.ParaUI;
+import utiles.UtilesTablero;
 
 public class MALCrearJuego implements ActionListener {
 	ParaUI control;
+	UtilesTablero utiles = new UtilesTablero();
 
 	public MALCrearJuego(ParaUI control) {
 		super();
@@ -20,6 +22,9 @@ public class MALCrearJuego implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		control.crearJuego();
+		int numeroMinas = Integer.valueOf(this.control.getTxtNumeroMinas().getText());
+		int casillas = this.utiles.calcularCasillas(numeroMinas, this.control.getDificultad());
+		int lado = this.utiles.calcularLado(casillas);
+		this.control.crearJuego(lado, numeroMinas);
 	}
 }

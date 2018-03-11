@@ -1,30 +1,56 @@
 package modelo;
 
 public class Tablero {
-	private Casilla tablero[][];
-	private int ancho;
-	private int alto;
+	public Casilla casillas[][];
 	private int minas;
 
-	public Tablero(int ancho, int alto, int minas) {
+	public Tablero(int lado, int minas) {
 		super();
-		this.ancho = ancho;
-		this.alto = alto;
 		this.minas = minas;
+		this.casillas = new Casilla[lado][lado];
+		for (int i = 0; i < lado; i++) {
+			for (int j = 0; j < lado; j++) {
+				this.casillas[i][j] = new Casilla(i, j);
+			}
+		}
 	}
 
 	/**
-	 * Coloca una mina en la posición seleccionada.
+	 * Comprueba si la casilla actual está dentro del rango del tablero.
 	 * 
 	 * @param x
 	 *            posición x.
 	 * @param y
 	 *            posición y.
+	 * @return true si la casilla está dentro del tablero. False si no.
+	 */
+	public boolean comprobarRango(int x, int y) {
+		return x >= 0 && x < this.casillas.length && y >= 0 && y < this.casillas[x].length;
+	}
+
+	public Casilla[][] getTablero() {
+		return casillas;
+	}
+
+	public void setTablero(Casilla[][] tablero) {
+		this.casillas = tablero;
+	}
+
+	public int getMinas() {
+		return minas;
+	}
+
+	public void setMinas(int minas) {
+		this.minas = minas;
+	}
+
+	/*
+	 * Coloca una mina en la posición.
 	 */
 	public void colocarMina(int x, int y) {
-		this.tablero[x][y].setMina(true);
+		this.casillas[x][y].setMina(true);
 	}
-	
+
 	/**
 	 * Marca la casilla seleccionada.
 	 * 
@@ -34,7 +60,7 @@ public class Tablero {
 	 *            posición y.
 	 */
 	public void marcarCasilla(int x, int y) {
-		this.tablero[x][y].setMarcada(true);
+		casillas[x][y].setMarcada(true);
 	}
 
 	/**
@@ -46,7 +72,7 @@ public class Tablero {
 	 *            posición y.
 	 */
 	public void desvelarCasilla(int x, int y) {
-		this.tablero[x][y].setVelada(false);
+		casillas[x][y].setVelada(false);
 	}
 
 	/**
@@ -54,9 +80,9 @@ public class Tablero {
 	 * incrementa en 1 el número de minas de las casillas de alrededor.
 	 */
 	public void calcularMinasAlrededor() {
-		for (int i = 0; i < tablero.length; i++) {
-			for (int j = 0; j < tablero.length; j++) {
-				if (this.tablero[i][j].isMina()) {
+		for (int i = 0; i < this.casillas.length; i++) {
+			for (int j = 0; j < this.casillas.length; j++) {
+				if (this.casillas[i][j].isMina()) {
 					incrementarMinas(i, j);
 				}
 			}
@@ -71,59 +97,37 @@ public class Tablero {
 	 * @param y
 	 *            posición y.
 	 */
-	private void incrementarMinas(int x, int y) {
+	public void incrementarMinas(int x, int y) {
 		for (int i = x - 1; i <= x + 1; i++) {
 			for (int j = y - 1; j < y + 1; j++) {
 				if (comprobarRango(i, j) && x != 0 && y != 0) {
-					this.tablero[i][j].numeroMinas++;
+					this.casillas[i][j].numeroMinas++;
 				}
 			}
 		}
 	}
 
 	/**
-	 * Comprueba si la casilla actual está dentro del rango del tablero.
+	 * Recorre de forma recursiva el tablero, comprobando los alrededores de
+	 * aquellas casillas vacías.
 	 * 
 	 * @param x
-	 *            posición x.
+	 *            coordenada x de origen.
 	 * @param y
-	 *            posición y.
-	 * @return true si la casilla está dentro del tablero. False si no.
+	 *            coordenada y de origen.
 	 */
-	private boolean comprobarRango(int x, int y) {
-		return x >= 0 && x < this.tablero.length && y >= 0 && y < this.tablero[x].length;
+	public void recorrer(int x, int y) {
+		this.casillas[x][y].setVelada(false);
+		for (int i = x - 1; i <= x + 1; i++) {
+			for (int j = y - 1; j <= y + 1; j++) {
+				if (this.comprobarRango(i, j)) {
+					if (this.casillas[i][j].getNumeroMinas() == 0 && this.casillas[i][j].isVelada()) {
+						recorrer(i, j);
+					} else {
+						this.casillas[i][j].setVelada(false);
+					}
+				}
+			}
+		}
 	}
-
-	public Casilla[][] getTablero() {
-		return tablero;
-	}
-
-	public void setTablero(Casilla[][] tablero) {
-		this.tablero = tablero;
-	}
-
-	public int getAncho() {
-		return ancho;
-	}
-
-	public void setAncho(int ancho) {
-		this.ancho = ancho;
-	}
-
-	public int getAlto() {
-		return alto;
-	}
-
-	public void setAlto(int alto) {
-		this.alto = alto;
-	}
-
-	public int getMinas() {
-		return minas;
-	}
-
-	public void setMinas(int minas) {
-		this.minas = minas;
-	}
-
 }

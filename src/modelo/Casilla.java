@@ -3,11 +3,12 @@ package modelo;
 public class Casilla {
 	protected boolean mina = false, velada = true, marcada = false;
 	protected int numeroMinas = 0;
-	protected Coordenada coordenadas;
+	protected int posX, posY;
 
-	public Casilla(Coordenada coordenadas) {
+	public Casilla(int posX, int posY) {
 		super();
-		this.coordenadas = coordenadas;
+		this.posX = posX;
+		this.posY = posY;
 	}
 
 	public boolean isMina() {
@@ -32,14 +33,6 @@ public class Casilla {
 
 	public void setNumeroMinas(int numeroMinas) {
 		this.numeroMinas = numeroMinas;
-	}
-
-	public Coordenada getCoordenadas() {
-		return coordenadas;
-	}
-
-	public void setCoordenadas(Coordenada coordenadas) {
-		this.coordenadas = coordenadas;
 	}
 
 	public boolean isMarcada() {

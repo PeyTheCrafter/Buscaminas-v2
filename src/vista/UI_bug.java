@@ -211,4 +211,8 @@ public class UI_bug extends JFrame {
 		Dificultad dificultad = (Dificultad) cbSelectorDificultad.getSelectedItem();
 		return dificultad.getValor();
 	}
+	
+	public Botonera getBotonera() {
+		return botonera;
+	}
 }

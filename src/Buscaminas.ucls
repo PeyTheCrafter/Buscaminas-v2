@@ -78,7 +78,7 @@
   </association>  
   <association id="11">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="12" name="tablero">        
+      <attribute id="12" name="casillas">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="13" minimum="0" maximum="2147483647">        
